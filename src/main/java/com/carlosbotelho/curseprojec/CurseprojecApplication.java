@@ -1,9 +1,13 @@
 package com.carlosbotelho.curseprojec;
 
 import com.carlosbotelho.curseprojec.domain.Category;
+import com.carlosbotelho.curseprojec.domain.City;
 import com.carlosbotelho.curseprojec.domain.Product;
+import com.carlosbotelho.curseprojec.domain.State;
 import com.carlosbotelho.curseprojec.repositories.CategoryRepository;
+import com.carlosbotelho.curseprojec.repositories.CityRepository;
 import com.carlosbotelho.curseprojec.repositories.ProductRepository;
+import com.carlosbotelho.curseprojec.repositories.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +27,12 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private CityRepository cityRepository;
+
+	@Autowired
+	private StateRepository stateRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -44,5 +54,15 @@ public class CurseprojecApplication implements CommandLineRunner {
 		categoryRepository.saveAll(Arrays.asList(cat1,cat2));
 		productRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 
+		State s1 = new State(null, "Minas Gerais");
+		State s2 = new State(null, "São Paulo");
+
+		City c1 = new City(null, "Uberlândia", s1);
+		City c2 = new City(null, "São Paulo", s2);
+		City c3 = new City(null, "Campinas", s2);
+
+		stateRepository.saveAll(Arrays.asList(s1,s2));
+		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
 	}
 }
