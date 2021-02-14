@@ -1,9 +1,10 @@
 package com.carlosbotelho.curseprojec.resources;
 
 import com.carlosbotelho.curseprojec.domain.Category;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.carlosbotelho.curseprojec.services.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +13,13 @@ import java.util.List;
 @RequestMapping (value = "/categories")
 public class CategoryResource {
 
-    @GetMapping
-    public List<Category> listar (){
 
-        Category cat1 = new Category(1,"Eletronicos");
-        Category cat2 = new Category(2,"Livros");
+    private CategoryService categoryService;
 
-        List<Category> list = new ArrayList<>();
-
-        list.add(cat1);
-        list.add(cat2);
-
-        return list;
-
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> findById(@PathVariable Integer id){
+        Category obj = categoryService.findBy(id);
+        return ResponseEntity.ok().body(obj);
     }
 
 }
