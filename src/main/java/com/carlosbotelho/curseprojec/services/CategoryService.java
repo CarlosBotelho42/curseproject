@@ -2,6 +2,7 @@ package com.carlosbotelho.curseprojec.services;
 
 import com.carlosbotelho.curseprojec.domain.Category;
 import com.carlosbotelho.curseprojec.repositories.CategoryRepository;
+import com.carlosbotelho.curseprojec.services.exceptions.ObjectNotfoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,12 @@ public class CategoryService {
 
     public Category findBy(Integer id){
         Optional<Category> obj = categoryRepository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotfoundException(
+                "Objeto não encontrado! Id: "
+                + id
+                + ", Tipo: "
+                + Category.class.getName()
+        ));
     }
 
 }

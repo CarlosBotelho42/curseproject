@@ -43,6 +43,6 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 		categoryRepository.saveAll(Arrays.asList(cat1,cat2));
 		productRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
-		
+
 	}
 }
