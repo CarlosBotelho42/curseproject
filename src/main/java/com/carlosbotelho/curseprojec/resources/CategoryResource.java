@@ -13,10 +13,10 @@ import java.util.List;
 @RequestMapping (value = "/categories")
 public class CategoryResource {
 
-
+    @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id){
         Category obj = categoryService.findBy(id);
         return ResponseEntity.ok().body(obj);

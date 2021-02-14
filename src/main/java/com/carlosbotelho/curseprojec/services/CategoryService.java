@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 //Serviço capaz de atender o controlador Rest relacionado a operações com categorias
+@Service
 public class CategoryService {
 
     @Autowired
