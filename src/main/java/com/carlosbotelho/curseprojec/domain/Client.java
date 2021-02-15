@@ -1,6 +1,7 @@
 package com.carlosbotelho.curseprojec.domain;
 
 import com.carlosbotelho.curseprojec.domain.enums.ClientRole;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class Client implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
 
+    @JsonManagedReference
     @ElementCollection
     @CollectionTable(name = "PHONE")
     private Set<String > phones = new HashSet<>();
