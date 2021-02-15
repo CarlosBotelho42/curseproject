@@ -1,13 +1,8 @@
 package com.carlosbotelho.curseprojec;
 
-import com.carlosbotelho.curseprojec.domain.Category;
-import com.carlosbotelho.curseprojec.domain.City;
-import com.carlosbotelho.curseprojec.domain.Product;
-import com.carlosbotelho.curseprojec.domain.State;
-import com.carlosbotelho.curseprojec.repositories.CategoryRepository;
-import com.carlosbotelho.curseprojec.repositories.CityRepository;
-import com.carlosbotelho.curseprojec.repositories.ProductRepository;
-import com.carlosbotelho.curseprojec.repositories.StateRepository;
+import com.carlosbotelho.curseprojec.domain.*;
+import com.carlosbotelho.curseprojec.domain.enums.ClientRole;
+import com.carlosbotelho.curseprojec.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -33,6 +28,12 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 	@Autowired
 	private StateRepository stateRepository;
+
+	@Autowired
+	private AddressRepository addressRepository;
+
+	@Autowired
+	private ClientRepository clientRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -63,6 +64,18 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 		stateRepository.saveAll(Arrays.asList(s1,s2));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
-		
+
+		Client cli1 = new Client(null, "Maria Silvia", "maria@gmail.com", "3499854784", ClientRole.PESSOAFISICA);
+
+		cli1.getPhones().addAll(Arrays.asList("92587549", "92856331"));
+
+		Address a1 = new Address(null, "Rua Flores", "300", "Apto 301", "Jadim", "89489464", cli1, c1);
+		Address a2 = new Address(null, "Avenida Matos", "105", "Sala 800", "Centro", "7546464", cli1, c2);
+
+		cli1.getAddresses().addAll(Arrays.asList(a1, a2));
+
+		clientRepository.saveAll(Arrays.asList(cli1));
+		addressRepository.saveAll(Arrays.asList(a1,a2));
+
 	}
 }
