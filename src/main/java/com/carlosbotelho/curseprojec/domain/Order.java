@@ -1,13 +1,14 @@
 package com.carlosbotelho.curseprojec.domain;
 
+import com.carlosbotelho.curseprojec.domain.item.OrderItem;
 import com.carlosbotelho.curseprojec.domain.payment.Payment;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_Order")
@@ -30,7 +31,9 @@ public class Order implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Payment payment;
 
-//    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
+
 
     public Order(){
 
@@ -84,13 +87,13 @@ public class Order implements Serializable {
         this.payment = payment;
     }
 
-//    public List<Product> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProducts(List<Product> products) {
-//        this.products = products;
-//    }
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<OrderItem> items) {
+        this.items = items;
+    }
 
     @Override
     public boolean equals(Object o) {

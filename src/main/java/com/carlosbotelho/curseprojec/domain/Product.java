@@ -1,12 +1,11 @@
 package com.carlosbotelho.curseprojec.domain;
 
+import com.carlosbotelho.curseprojec.domain.item.OrderItem;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_Product")
@@ -27,7 +26,8 @@ public class Product implements Serializable {
     )
     private List<Category> categories = new ArrayList<>();
 
-    //private List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Product(){
 
@@ -37,6 +37,14 @@ public class Product implements Serializable {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public List<Order> getOrders(){
+        List<Order> list = new ArrayList<>();
+        for (OrderItem x : items){
+            list.add(x.getOrder());
+        }
+        return list;
     }
 
     public Integer getId() {
@@ -71,13 +79,13 @@ public class Product implements Serializable {
         this.categories = categories;
     }
 
-//    public List<Order> getOrders() {
-//        return orders;
-//    }
+    public Set<OrderItem> getItems() {
+        return items;
+    }
 
-//    public void setOrders(List<Order> orders) {
-//        this.orders = orders;
-//    }
+    public void setItems(Set<OrderItem> items) {
+        this.items = items;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -3,6 +3,7 @@ package com.carlosbotelho.curseprojec;
 import com.carlosbotelho.curseprojec.domain.*;
 import com.carlosbotelho.curseprojec.domain.enums.ClientRole;
 import com.carlosbotelho.curseprojec.domain.enums.PaymentStatus;
+import com.carlosbotelho.curseprojec.domain.item.OrderItem;
 import com.carlosbotelho.curseprojec.domain.payment.CardPayment;
 import com.carlosbotelho.curseprojec.domain.payment.Payment;
 import com.carlosbotelho.curseprojec.domain.payment.TicketPayment;
@@ -46,6 +47,9 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 	@Autowired
 	private PaymentRepository paymentRepository;
+
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -104,6 +108,19 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 		orderRepository.saveAll(Arrays.asList(ped1, ped2));
 		paymentRepository.saveAll(Arrays.asList(pag1,pag2));
+
+		OrderItem oi1 = new OrderItem(prod1, ped1, 0.00,1, 5000.00);
+		OrderItem oi2 = new OrderItem(prod3, ped1, 0.00,2, 240.00);
+		OrderItem oi3 = new OrderItem(prod2, ped2, 100.00,1, 950.00);
+
+		ped1.getItems().addAll(Arrays.asList(oi1, oi2));
+		ped2.getItems().addAll(Arrays.asList(oi3));
+
+		prod1.getItems().addAll(Arrays.asList(oi1));
+		prod2.getItems().addAll(Arrays.asList(oi3));
+		prod3.getItems().addAll(Arrays.asList(oi2));
+
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3));
 
 	}
 }
