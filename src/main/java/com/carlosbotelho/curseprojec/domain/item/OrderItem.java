@@ -2,6 +2,7 @@ package com.carlosbotelho.curseprojec.domain.item;
 
 import com.carlosbotelho.curseprojec.domain.Order;
 import com.carlosbotelho.curseprojec.domain.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @Table(name = "tb_OrderItem")
 public class OrderItem implements Serializable {
 
+    @JsonIgnore
     @EmbeddedId
     private OrderItemPK id = new OrderItemPK();
 
@@ -36,6 +38,7 @@ public class OrderItem implements Serializable {
         return id.getProduct();
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }

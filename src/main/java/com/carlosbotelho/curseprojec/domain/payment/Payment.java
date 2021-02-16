@@ -2,6 +2,7 @@ package com.carlosbotelho.curseprojec.domain.payment;
 
 import com.carlosbotelho.curseprojec.domain.Order;
 import com.carlosbotelho.curseprojec.domain.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jdk.jfr.Enabled;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public abstract class Payment implements Serializable {
 
     private Integer paymentStatus;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "order_id")
     @MapsId
@@ -48,6 +50,7 @@ public abstract class Payment implements Serializable {
     public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus.getCod();
     }
+
 
     public Order getOrder() {
         return order;

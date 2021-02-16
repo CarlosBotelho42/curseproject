@@ -2,6 +2,7 @@ package com.carlosbotelho.curseprojec.domain.payment;
 
 import com.carlosbotelho.curseprojec.domain.Order;
 import com.carlosbotelho.curseprojec.domain.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,7 +12,10 @@ import java.util.Date;
 @Table(name = "tb_TicketPayment")
 public class TicketPayment extends Payment{
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dueDate;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date payDay;
 
     public TicketPayment(){
