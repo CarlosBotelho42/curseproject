@@ -1,7 +1,6 @@
 package com.carlosbotelho.curseprojec.domain;
 
 import com.carlosbotelho.curseprojec.domain.item.OrderItem;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -19,7 +18,8 @@ public class Product implements Serializable {
     private String name;
     private Double price;
 
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "tb_Prod_Cat",
             joinColumns = @JoinColumn(name = "product_id"),

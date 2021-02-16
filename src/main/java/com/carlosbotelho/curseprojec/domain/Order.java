@@ -3,7 +3,6 @@ package com.carlosbotelho.curseprojec.domain;
 import com.carlosbotelho.curseprojec.domain.item.OrderItem;
 import com.carlosbotelho.curseprojec.domain.payment.Payment;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,12 +26,12 @@ public class Order implements Serializable {
     @JoinColumn(name = "delivery_address_id")
     private Address deliveryAddress;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Payment payment;
 

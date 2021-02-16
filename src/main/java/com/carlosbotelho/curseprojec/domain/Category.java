@@ -1,9 +1,6 @@
 package com.carlosbotelho.curseprojec.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
-import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +16,9 @@ public class Category implements Serializable {
 
     private String name;
 
-    @JsonManagedReference
+    //esss notação pode causar alguns problemas de requisoções json, então vou subistituir por outra notação,
+    // que vai ficar na relação que não quero que seja serializada
+    //@JsonManagedReference
     @ManyToMany(mappedBy = "categories")
     private List<Product> products = new ArrayList<>();
 
