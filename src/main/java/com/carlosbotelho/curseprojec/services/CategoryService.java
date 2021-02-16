@@ -25,4 +25,9 @@ public class CategoryService {
         ));
     }
 
+   public Category insert(Category obj){
+        obj.setId(null);
+        return categoryRepository.save(obj);
+   }
+
 }
