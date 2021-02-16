@@ -2,12 +2,18 @@ package com.carlosbotelho.curseprojec;
 
 import com.carlosbotelho.curseprojec.domain.*;
 import com.carlosbotelho.curseprojec.domain.enums.ClientRole;
+import com.carlosbotelho.curseprojec.domain.enums.PaymentStatus;
+import com.carlosbotelho.curseprojec.domain.payment.CardPayment;
+import com.carlosbotelho.curseprojec.domain.payment.Payment;
+import com.carlosbotelho.curseprojec.domain.payment.TicketPayment;
 import com.carlosbotelho.curseprojec.repositories.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -34,6 +40,12 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 	@Autowired
 	private ClientRepository clientRepository;
+
+	@Autowired
+	private OrderRepository orderRepository;
+
+	@Autowired
+	private PaymentRepository paymentRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -76,6 +88,22 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 		clientRepository.saveAll(Arrays.asList(cli1));
 		addressRepository.saveAll(Arrays.asList(a1,a2));
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		Order ped1 = new Order(null, sdf.parse("30/09/2020 13:58"),a1, cli1);
+		Order ped2 = new Order(null, sdf.parse("25/10/2020 12:40"),a2, cli1);
+
+		Payment pag1 = new CardPayment(null,  PaymentStatus.QUITADO, ped1,6 );
+		ped1.setPayment(pag1);
+
+		Payment pag2 = new TicketPayment(null,  PaymentStatus.PENDENTE, ped2, sdf.parse("30/10/2020 00:00"),null );
+		ped2.setPayment(pag2);
+
+		cli1.getOrders().addAll(Arrays.asList(ped1,ped2));
+
+		orderRepository.saveAll(Arrays.asList(ped1, ped2));
+		paymentRepository.saveAll(Arrays.asList(pag1,pag2));
 
 	}
 }

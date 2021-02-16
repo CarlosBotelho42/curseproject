@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "tb_Product")
 public class Product implements Serializable {
 
     @Id
@@ -20,11 +21,13 @@ public class Product implements Serializable {
 
     @JsonBackReference
     @ManyToMany
-    @JoinTable(name = "PROD_CAT",
+    @JoinTable(name = "tb_Prod_Cat",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> categories = new ArrayList<>();
+
+    //private List<Order> orders = new ArrayList<>();
 
     public Product(){
 
@@ -67,6 +70,14 @@ public class Product implements Serializable {
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
+
+//    public List<Order> getOrders() {
+//        return orders;
+//    }
+
+//    public void setOrders(List<Order> orders) {
+//        this.orders = orders;
+//    }
 
     @Override
     public boolean equals(Object o) {

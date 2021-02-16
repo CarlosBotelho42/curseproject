@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Table(name = "tb_City")
 public class City implements Serializable {
 
     @Id

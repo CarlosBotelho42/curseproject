@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "tb_Category")
 public class Category implements Serializable {
 
     @Id
