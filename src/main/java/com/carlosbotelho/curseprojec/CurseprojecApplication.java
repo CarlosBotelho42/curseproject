@@ -56,6 +56,17 @@ public class CurseprojecApplication implements CommandLineRunner {
 
 		Category cat1 = new Category(null, "Informatica");
 		Category cat2 = new Category(null, "Escritorio");
+		Category cat3 = new Category(null, "Ar e Ventilação");
+		Category cat4 = new Category(null, "Games");
+		Category cat5 = new Category(null, "Tv e Vídeo");
+		Category cat6 = new Category(null, "Instrumentos Musicais");
+		Category cat7 = new Category(null, "Livros");
+		Category cat8 = new Category(null, "Móveis");
+		Category cat9 = new Category(null, "Celulares");
+		Category cat10 = new Category(null, "Brinquedos");
+		Category cat11 = new Category(null, "Câmeras e Drones");
+		Category cat12 = new Category(null, "Pet Shop");
+
 
 		Product prod1 = new Product(null,"Notebook", 5000.00);
 		Product prod2 = new Product(null,"Impressora", 950.00);
@@ -68,7 +79,7 @@ public class CurseprojecApplication implements CommandLineRunner {
 		prod2.getCategories().addAll(Arrays.asList(cat1, cat2));
 		prod3.getCategories().addAll(Arrays.asList(cat1));
 
-		categoryRepository.saveAll(Arrays.asList(cat1,cat2));
+		categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7,cat8,cat9,cat10,cat11,cat12));
 		productRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 
 		State s1 = new State(null, "Minas Gerais");
