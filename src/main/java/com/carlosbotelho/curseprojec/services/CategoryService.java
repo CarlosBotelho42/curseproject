@@ -2,8 +2,10 @@ package com.carlosbotelho.curseprojec.services;
 
 import com.carlosbotelho.curseprojec.domain.Category;
 import com.carlosbotelho.curseprojec.repositories.CategoryRepository;
+import com.carlosbotelho.curseprojec.services.exceptions.DataIntegrityViolation;
 import com.carlosbotelho.curseprojec.services.exceptions.ObjectNotfoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -34,5 +36,15 @@ public class CategoryService {
         findBy(obj.getId());
         return  categoryRepository.save(obj);
    }
+
+   public void delete(Integer id){
+        findBy(id);
+        try {
+            categoryRepository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolation("Não é possível excluir uma categoria que tenha produtos!");
+        }
+    }
 
 }
