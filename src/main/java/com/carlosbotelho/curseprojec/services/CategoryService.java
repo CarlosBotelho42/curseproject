@@ -30,4 +30,9 @@ public class CategoryService {
         return categoryRepository.save(obj);
    }
 
+   public Category update(Category obj){
+        findBy(obj.getId());
+        return  categoryRepository.save(obj);
+   }
+
 }

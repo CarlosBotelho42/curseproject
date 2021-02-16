@@ -4,6 +4,7 @@ import com.carlosbotelho.curseprojec.domain.Category;
 import com.carlosbotelho.curseprojec.domain.Order;
 import com.carlosbotelho.curseprojec.services.CategoryService;
 import com.carlosbotelho.curseprojec.services.OrderService;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class OrderResource {
     private OrderService orderService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id){
+    public ResponseEntity<Order> findById(@PathVariable Integer id){
         Order obj = orderService.findBy(id);
 
         return ResponseEntity.ok().body(obj);
