@@ -20,19 +20,19 @@ import java.util.stream.Collectors;
 public class CategoryResource {
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryService service;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Category> findById(@PathVariable Integer id){
-        Category obj = categoryService.findBy(id);
+        Category obj = service.findBy(id);
 
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoryDTO objDto){
-        Category obj = categoryService.fromDto(objDto);
-        obj = categoryService.insert(obj);
+        Category obj = service.fromDto(objDto);
+        obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -40,21 +40,21 @@ public class CategoryResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody CategoryDTO objDto, @PathVariable Integer id){
-        Category obj = categoryService.fromDto(objDto);
+        Category obj = service.fromDto(objDto);
         obj.setId(id);
-        obj = categoryService.update(obj);
+        obj = service.update(obj);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
-        categoryService.delete(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> findAll(){
-        List<Category> list = categoryService.findAll();
+        List<Category> list = service.findAll();
         List<CategoryDTO> listDto = list.stream()
                 .map(obj -> new CategoryDTO(obj))
                 .collect(Collectors.toList());
@@ -70,7 +70,7 @@ public class CategoryResource {
            @RequestParam(value ="orderBy", defaultValue ="name") String orderBy,
            @RequestParam(value ="direction", defaultValue ="ASC") String direction){
 
-        Page<Category> list = categoryService.findPage(page, linesPerPage, orderBy, direction );
+        Page<Category> list = service.findPage(page, linesPerPage, orderBy, direction );
         Page<CategoryDTO> listDto = list.map(obj -> new CategoryDTO(obj));
 
         return ResponseEntity.ok().body(listDto);

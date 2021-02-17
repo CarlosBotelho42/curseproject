@@ -20,10 +20,10 @@ import java.util.Optional;
 public class CategoryService {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryRepository repo;
 
     public Category findBy(Integer id){
-        Optional<Category> obj = categoryRepository.findById(id);
+        Optional<Category> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotfoundException(
                 "Objeto não encontrado! Id: "
                 + id
@@ -34,18 +34,18 @@ public class CategoryService {
 
    public Category insert(Category obj){
         obj.setId(null);
-        return categoryRepository.save(obj);
+        return repo.save(obj);
    }
 
    public Category update(Category obj){
         findBy(obj.getId());
-        return  categoryRepository.save(obj);
+        return  repo.save(obj);
    }
 
    public void delete(Integer id){
         findBy(id);
         try {
-            categoryRepository.deleteById(id);
+            repo.deleteById(id);
         }
         catch (DataIntegrityViolationException e){
             throw new DataIntegrityViolation("Não é possível excluir uma categoria que tenha produtos!");
@@ -53,12 +53,12 @@ public class CategoryService {
     }
 
     public List<Category> findAll(){
-        return categoryRepository.findAll();
+        return repo.findAll();
     }
 
     public Page<Category> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return categoryRepository.findAll(pageRequest);
+        return repo.findAll(pageRequest);
     }
 
     public Category fromDto(CategoryDTO objDto){

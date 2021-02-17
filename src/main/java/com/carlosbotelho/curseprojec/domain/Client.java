@@ -42,7 +42,7 @@ public class Client implements Serializable {
         this.name = name;
         this.email = email;
         this.cpfOrCnpj = cpfOrCnpj;
-        this.clientRole = clientRole.getCod();
+        this.clientRole = (clientRole==null) ? null : clientRole.getCod();
     }
 
     public Integer getId() {
