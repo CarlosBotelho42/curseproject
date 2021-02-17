@@ -1,12 +1,17 @@
 package com.carlosbotelho.curseprojec.dto;
 
 import com.carlosbotelho.curseprojec.domain.Category;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoryDTO implements Serializable {
 
     private Integer id;
+
+    @NotEmpty(message = "Valor obrigatório!")
+    @Length(min = 5, max = 50, message = "Tamanho deve ser entre 5 a 50 caracteres")
     private String name;
 
     public CategoryDTO(){
