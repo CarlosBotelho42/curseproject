@@ -32,7 +32,7 @@ public abstract class Payment implements Serializable {
 
     public Payment(Integer id, PaymentStatus paymentStatus, Order order) {
         this.id = id;
-        this.paymentStatus = paymentStatus.getCod();
+        this.paymentStatus = (paymentStatus == null) ? null : paymentStatus.getCod();
         this.order = order;
     }
 

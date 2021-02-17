@@ -50,7 +50,7 @@ public class ClientService {
             repo.deleteById(id);
         }
         catch (DataIntegrityViolationException e){
-            throw new DataIntegrityViolation("Não é possível excluir uma categoria que tenha produtos!");
+            throw new DataIntegrityViolation("Não é possível excluir, pois há entidades relacionadas!");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.carlosbotelho.curseprojec.services;
 
 import com.carlosbotelho.curseprojec.domain.Category;
+import com.carlosbotelho.curseprojec.domain.Client;
 import com.carlosbotelho.curseprojec.dto.CategoryDTO;
 import com.carlosbotelho.curseprojec.repositories.CategoryRepository;
 import com.carlosbotelho.curseprojec.services.exceptions.DataIntegrityViolation;
@@ -37,10 +38,15 @@ public class CategoryService {
         return repo.save(obj);
    }
 
-   public Category update(Category obj){
-        findBy(obj.getId());
-        return  repo.save(obj);
-   }
+    public Category update(Category obj){
+        Category newObj = findBy(obj.getId());
+        updateData(newObj, obj);
+        return  repo.save(newObj);
+    }
+
+    private void updateData(Category newObj, Category obj) {
+        newObj.setName(obj.getName());
+    }
 
    public void delete(Integer id){
         findBy(id);
