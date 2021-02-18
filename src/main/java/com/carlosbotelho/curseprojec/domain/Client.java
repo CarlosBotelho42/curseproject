@@ -15,10 +15,9 @@ public class Client implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private  String name;
+    private String name;
     private String email;
     private String cpfOrCnpj;
-
     private Integer clientRole;
 
     @OneToMany(mappedBy = "client")
