@@ -1,21 +1,42 @@
 package com.carlosbotelho.curseprojec.dto;
 
+import com.carlosbotelho.curseprojec.services.validation.ClientInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientInsert
 public class ClientNewDTO implements Serializable {
 
+    @NotEmpty(message = "Valor obrigatório!")
+    @Length(min = 5, max = 50, message = "Tamanho deve ser entre 5 a 50 caracteres")
     private String name;
+
+    @NotEmpty(message = "Valor obrigatório!")
+    @Length(min = 5, max = 50, message = "Tamanho deve ser entre 5 a 80 caracteres")
     private String email;
+
+    @NotEmpty(message = "Valor obrigatório!")
     private String cpfOrCnpj;
+
     private Integer clientRole;
 
+    @NotEmpty(message = "Valor obrigatório!")
     private String logrdouro;
+
+    @NotEmpty(message = "Valor obrigatório!")
     private String number;
+
     private String complement;
     private String district;
+
+    @NotEmpty(message = "Valor obrigatório!")
     private String cep;
 
+    @NotEmpty(message = "Valor obrigatório!")
     private String phone1;
+
     private String phone2;
     private String phone3;
 
