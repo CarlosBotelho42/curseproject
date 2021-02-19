@@ -20,7 +20,8 @@ public class Client implements Serializable {
     private String cpfOrCnpj;
     private Integer clientRole;
 
-    @OneToMany(mappedBy = "client")
+    //cascade = posso excluir um cliente juntamente com seu endereço com essa notação******
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
     //@JsonManagedReference
