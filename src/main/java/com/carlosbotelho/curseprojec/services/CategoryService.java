@@ -48,7 +48,7 @@ public class CategoryService {
         newObj.setName(obj.getName());
     }
 
-   public void delete(Integer id){
+    public void delete(Integer id){
         findBy(id);
         try {
             repo.deleteById(id);

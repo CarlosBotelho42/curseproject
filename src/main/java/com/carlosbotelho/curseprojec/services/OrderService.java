@@ -14,10 +14,10 @@ import java.util.Optional;
 public class OrderService {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderRepository repo;
 
     public Order findBy(Integer id){
-        Optional<Order> obj = orderRepository.findById(id);
+        Optional<Order> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotfoundException(
                 "Objeto não encontrado! Id: "
                 + id
