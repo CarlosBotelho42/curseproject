@@ -51,6 +51,15 @@ public class Order implements Serializable {
 
     }
 
+    //Percorrer a lista de items do pedido, para cada OrderItem na minha lista de items = somar com SubTotal!!!
+    public double getTotalValue(){
+//        double sum = 0.0;
+//        for (OrderItem oi : items){
+//            sum =sum + oi.getSubtotal();
+//        }
+        return items.stream().mapToDouble(x -> x.getSubtotal()).sum();
+    }
+
     public Integer getId() {
         return id;
     }
