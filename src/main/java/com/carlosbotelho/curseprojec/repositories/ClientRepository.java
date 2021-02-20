@@ -14,4 +14,5 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     @Transactional(readOnly = true)
     Client findByEmail(String email);
     //O Spring Data automaticamente vai detectar a busca por email e vai implemtar o metodo
+
 }

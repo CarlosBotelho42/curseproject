@@ -42,6 +42,7 @@ public class ClientInsertValidator implements ConstraintValidator<ClientInsert, 
             list.add(new FieldMessage("email", "Email já cadastrado!"));
         }
 
+
         for (FieldMessage e : list) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(e.getMessage())

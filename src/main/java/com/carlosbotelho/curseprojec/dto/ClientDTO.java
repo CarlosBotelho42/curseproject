@@ -1,12 +1,14 @@
 package com.carlosbotelho.curseprojec.dto;
 
 import com.carlosbotelho.curseprojec.domain.Client;
+import com.carlosbotelho.curseprojec.services.validation.ClientUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientUpdate
 public class ClientDTO implements Serializable {
 
     private Integer id;
