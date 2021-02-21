@@ -3,13 +3,15 @@ package com.carlosbotelho.curseprojec.domain.payment;
 import com.carlosbotelho.curseprojec.domain.Order;
 import com.carlosbotelho.curseprojec.domain.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "tb_TicketPayment")
+@Table(name = "TicketPayment_tb")
+@JsonTypeName("ticketPayment")
 public class TicketPayment extends Payment{
 
     @JsonFormat(pattern = "dd/MM/yyyy")

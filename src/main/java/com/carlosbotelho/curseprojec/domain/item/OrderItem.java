@@ -42,9 +42,17 @@ public class OrderItem implements Serializable {
         return id.getProduct();
     }
 
+    public void setProduct(Product product){
+         id.setProduct(product);
+    }
+
     @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
+    }
+
+    public void setOrder(Order order){
+        id.setOrder(order);
     }
 
     public OrderItemPK getId() {
