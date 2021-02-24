@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "Product_tb")
 public class Product implements Serializable {
 
     @Id

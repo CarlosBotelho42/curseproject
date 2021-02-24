@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_State")
+@Table(name = "State_tb")
 public class State implements Serializable {
 
     @Id
