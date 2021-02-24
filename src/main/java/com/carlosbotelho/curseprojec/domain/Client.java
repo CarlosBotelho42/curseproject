@@ -26,7 +26,7 @@ public class Client implements Serializable {
 
     //@JsonManagedReference
     @ElementCollection
-    @CollectionTable(name = "tb_Phone")
+    @CollectionTable(name = "Phone_tb")
     private Set<String > phones = new HashSet<>();
 
     //@JsonBackReference

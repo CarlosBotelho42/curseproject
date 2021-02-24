@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_OrderItem")
+@Table(name = "OrderItem_tb")
 public class OrderItem implements Serializable {
 
     @JsonIgnore
