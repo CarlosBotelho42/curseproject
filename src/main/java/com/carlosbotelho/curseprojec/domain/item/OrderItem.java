@@ -8,6 +8,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 @Entity
@@ -98,5 +100,22 @@ public class OrderItem implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(getProduct().getName());
+        sb.append(", Quantidade: ");
+        sb.append(getAmount());
+        sb.append(", Preço unitário: ");
+        sb.append(nf.format(getPrice()));
+        sb.append(", Subtotal: ");
+        sb.append(nf.format(getSubtotal()));
+        sb.append("\n");
+
+        return sb.toString();
     }
 }

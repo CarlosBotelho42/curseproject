@@ -38,6 +38,9 @@ public class OrderService {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ClientService clientService;
+
     public Order findBy(Integer id){
         Optional<Order> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotfoundException(
@@ -52,6 +55,7 @@ public class OrderService {
     public Order insert(Order obj){
         obj.setId(null);
         obj.setInstant(new Date());
+        obj.setClient(clientService.findBy(obj.getClient().getId()));
         obj.getPayment().setPaymentStatus(PaymentStatus.PENDENTE);
         obj.getPayment().setOrder(obj);
 
@@ -64,10 +68,12 @@ public class OrderService {
 
         for(OrderItem oi : obj.getItems()){
             oi.setDiscount(0.0);
-            oi.setPrice(productService.findBy(oi.getProduct().getId()).getPrice());
+            oi.setProduct(productService.findBy(oi.getProduct().getId()));
+            oi.setPrice(oi.getProduct().getPrice());
             oi.setOrder(obj);
         }
         orderItemRepository.saveAll(obj.getItems());
+        System.out.println(obj);
         return obj;
     }
 
