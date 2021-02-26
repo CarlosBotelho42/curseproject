@@ -10,6 +10,7 @@ import com.carlosbotelho.curseprojec.repositories.OrderItemRepository;
 import com.carlosbotelho.curseprojec.repositories.OrderRepository;
 import com.carlosbotelho.curseprojec.repositories.PaymentRepository;
 import com.carlosbotelho.curseprojec.repositories.ProductRepository;
+import com.carlosbotelho.curseprojec.services.Email.EmailService;
 import com.carlosbotelho.curseprojec.services.exceptions.ObjectNotfoundException;
 import com.carlosbotelho.curseprojec.services.util.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class OrderService {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private EmailService emailService;
 
     public Order findBy(Integer id){
         Optional<Order> obj = repo.findById(id);
@@ -73,7 +77,7 @@ public class OrderService {
             oi.setOrder(obj);
         }
         orderItemRepository.saveAll(obj.getItems());
-        System.out.println(obj);
+        emailService.sendOrderConfirmationEmail(obj);
         return obj;
     }
 
