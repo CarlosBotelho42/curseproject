@@ -1,5 +1,7 @@
 package com.carlosbotelho.curseprojec.configuration;
 
+import com.carlosbotelho.curseprojec.services.Email.EmailService;
+import com.carlosbotelho.curseprojec.services.Email.SmtpEmailService;
 import com.carlosbotelho.curseprojec.services.util.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,11 @@ public class DevPropertiesConfig {
         dbService.instantiateDatabase();
         return true;
 
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 
 }
